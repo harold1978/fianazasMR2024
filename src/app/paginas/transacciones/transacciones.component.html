@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>Transacciones</h2>
+    <form (ngSubmit)="addTransaccion()" class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.descripcion" placeholder="Descripción" required>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.monto" placeholder="Monto" type="number" required>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.fecha" placeholder="Fecha" type="date" required>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.tipo" placeholder="Tipo" required>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.categoria" placeholder="Categoría" required>
+
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 p-1 mb-1">
+            <input class="form-control" [(ngModel)]="newTransaccion.saldo" placeholder="Saldo" type="number" required>
+
+        </div>
+      <button class="btn btn-primary btn-sm" type="submit">Agregar Transacción</button>
+    </form>
+ 
+    <div
+        class="table-responsive tabla-vertical mt-2 p-2"
+    >
+        <table
+            class="table table-sm table-hover table-borderless table-primary align-middle"
+        >
+            <thead class="table-light">
+                <caption>
+                    MOVIMIENTOS
+                </caption>
+                <tr>
+                    <th>FECHA</th>
+                    <th>DESCRIPCION</th>
+                    <th>TIPO</th>
+                    <th>MONTO</th>
+                    <th>SALDO</th>
+                    <th>COMANDOS</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @for (transaccion of transacciones; track $index) {
+                    <tr class="table-primary">
+                        <td scope="row">{{transaccion.fecha}}</td>
+                        <td>{{transaccion.descripcion}}</td>
+                        <td>{{transaccion.tipo}}</td>
+                        <td class="text-end">{{formatomoneda(transaccion.monto)}}</td>
+                        <td class="text-end pe-3">{{formatomoneda(transaccion.saldo)}}</td>
+                        <td class="row"><button class="btn btn-danger btn-sm col-sm" (click)="deleteTransaccion(transaccion.id)">Eliminar</button>
+                        <button class="btn btn-success btn-sm col" (click)="updateTransaccion(transaccion)">Actualizar</button></td>
+                    </tr>
+
+                }
+                
+            </tbody>
+            <tfoot class="text-end">
+                <tr>
+                    <td>
+                        <h2>TOTAL</h2>
+                    </td>
+                    <td colspan="3">{{formatomoneda(total())}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,4 @@
+.tabla-vertical{
+    max-height: 75rem;
+    overflow:auto;
+}
